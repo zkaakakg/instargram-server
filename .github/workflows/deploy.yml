@@ -52,6 +52,7 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
           script: |
+            sudo fuser -k 8080/tcp || true
             docker stop instargram-server || true
             docker rm instargram-server || true
             docker pull ${{ steps.login-ecr.outputs.registry }}/instargram-server-13:latest
